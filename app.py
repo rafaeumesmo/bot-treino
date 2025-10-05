@@ -39,7 +39,7 @@ def whatsapp_reply():
         treino = " ".join(parts[2:])
         treinos.setdefault(dia, []).append(treino)
         salvar_treinos(treinos)
-        reply.body(f"Adicionado '{treino}' ao treino de {dia.capitalize()}.")
+        reply.body(f"✅ Adicionado '{treino}' ao treino de {dia.capitalize()}.")
 
     elif comando == "remover" and len(parts) >= 3:
         dia = parts[1]
@@ -47,34 +47,34 @@ def whatsapp_reply():
         if dia in treinos and treino in treinos[dia]:
             treinos[dia].remove(treino)
             salvar_treinos(treinos)
-            reply.body(f"Removido '{treino}' do treino de {dia.capitalize()}.")
+            reply.body(f"❌ Removido '{treino}' do treino de {dia.capitalize()}.")
         else:
-            reply.body(f"Não encontrei '{treino}' em {dia.capitalize()}.")
+            reply.body(f"❌ Não encontrei '{treino}' em {dia.capitalize()}.")
 
     elif comando == "treino" and len(parts) == 2:
         dia = parts[1]
         if dia in treinos and treinos[dia]:
             lista = "\n- ".join(treinos[dia])
-            reply.body(f"Treino de {dia.capitalize()}:\n- {lista}")
+            reply.body(f"💪 Treino de {dia.capitalize()}:\n- {lista}")
         else:
-            reply.body(f"Não há treino registrado para {dia.capitalize()}.")
+            reply.body(f"❌ Não há treino registrado para {dia.capitalize()}.")
 
     elif comando == "listar":
         if treinos:
-            resposta = "Treinos registrados:\n"
+            resposta = "🏋️ Treinos registrados:\n"
             for dia, exercicios in treinos.items():
                 lista = "\n- ".join(exercicios)
                 resposta += f"{dia.capitalize()}:\n- {lista}\n"
             reply.body(resposta)
         else:
-            reply.body("Nenhum treino registrado.")
+            reply.body("❌ Nenhum treino registrado.")
     else:
         reply.body(
-            "Comandos disponíveis:\n"
-            "- treino [dia]\n"
-            "- adicionar [dia] [exercicio]\n"
-            "- remover [dia] [exercicio]\n"
-            "- listar"
+            "🔥Comandos disponíveis🔥:\n"
+            "- 💪 treino [dia]\n"
+            "- ✅ adicionar [dia] [exercicio]\n"
+            "- ❌ remover [dia] [exercicio]\n"
+            "- 🗒️ listar"
         )
 
     return str(resp)
