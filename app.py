@@ -34,7 +34,7 @@ def whatsapp_reply():
     parts = msg.split()
     comando = parts[0] if parts else ""
 
-    if comando == "adicionar" and len(parts) >= 3:
+    if comando == "add" and len(parts) >= 3:
         dia = parts[1]
         treino = " ".join(parts[2:])
         treinos.setdefault(dia, []).append(treino)
@@ -59,7 +59,7 @@ def whatsapp_reply():
         else:
             reply.body(f"❌ Não há treino registrado para {dia.capitalize()}.")
 
-    elif comando == "listar":
+    elif comando == "ls":
         if treinos:
             resposta = "🏋️ Treinos registrados:\n"
             for dia, exercicios in treinos.items():
@@ -72,9 +72,9 @@ def whatsapp_reply():
         reply.body(
             "🔥Comandos disponíveis🔥:\n"
             "- 💪 treino [dia]\n"
-            "- ✅ adicionar [dia] [exercicio]\n"
+            "- ✅ add [dia] [exercicio]\n"
             "- ❌ remover [dia] [exercicio]\n"
-            "- 🗒️ listar"
+            "- 🗒️ ls"
         )
 
     return str(resp)
